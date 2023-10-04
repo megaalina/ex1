@@ -10,52 +10,31 @@
 // Якщо слово є в тексті всередині іншого слова, треба враховувати його під час підрахунку.
 
 class Text{
-    constructor(str, word){
-        this.str = str = prompt("Введіть текст");
-        this.word = word = prompt("Введіть слово");
+    constructor(str){
+        this.str = str;
     }
 
-    researchWord(str, word){
+    searchWord(findWord){
+        let arrZnak = [",", ".", ":", ";", "(", ")", "#", "*", "'"];
+        let regist = this.str.toLocaleLowerCase();
 
+        arrZnak.forEach(arrZnak =>{
+            regist = regist.split(arrZnak).join('');
+        })
 
-        if(this.word.toLocaleLowerCase){
-            return true;
-        } else if(this.word.toLocaleUpperCase){
-            return true;
-        } else{
-            return false;
+        let registArr = regist.split(' ');
 
-        
-        console.log(this.str.includes(this.word));
+        let count = 0;
+
+        registArr.forEach(word =>{
+            word.includes(findWord) ? count++ : count;
+        });
+        return console.log(`Кількість слів : ${findWord}` + count);
     }
+
 }
 
-    countWord(str, word){
-        
-            let arr1 = this.str.split(" ");
-            let w1 = this.word.toLocaleLowerCase;
-         
-                let count1 = {};
-            
-                for (w1 of arr1) {
-                    if (count1[w1] === undefined) {
-                    count1[w1] = 1;
-                    } else {
-                    count1[w1]++;
-                    }
-                }
-                
-                console.log((count1));
-                
-            }
-
-    
-    print(){
-    console.log(this.countWord(this.str, this.word));
-}
-}
+const word1 = new Text("Быть или не быть, вот в чём вопрос.");
+word1.searchWord("быть");
 
 
-
-const word1 = new Text("Быть или не быть, вот в чём вопрос.", "Быть");
-word1.researchWord("Быть или не быть, вот в чём вопрос.", "Быть");

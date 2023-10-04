@@ -9,136 +9,96 @@
 // Зібрати в п'ятий масив усі прості числа з чотирьох масивів. Прибрати з масиву результату всі неунікальні значення.
 
 class Array{
-    constructor(arr1 = [12, 5, 7, 3], arr2 = [2, 23, 4, 5, 2, 5, 7, 9, 6], arr3 = [2, 5, 33, 6], arr4 = [5, 9, 4, 42],
-        arr5 = [arr1, arr2, arr3, arr4]){
-        this.arr1 = arr1;
-        this.arr2 = arr2;
-        this.arr3 = arr3;
-        this.arr4 = arr4;
-        this.arr5 = arr5.flat(Infinity);
+    constructor(arr1, arr2, arr3, arr4, arr5){
+        this.arr1 = [12, 5, 7, 3];
+        this.arr2 = [2, 23, 4, 5,];
+        this.arr3 = [2, 5, 7, 9,];
+        this.arr4 = [6, 2, 5, 12]
+        this.arr5 = [];
     }
 
-    sortingArray(){
-        this.arr5.sort(function(a,b){
-            return a - b;})
-    }
-
-    dublicatPrint(){
-        function onlyUnique(value, index, self) {
-            return self.indexOf(value) === index;
-          }
-          let unique1 = this.arr1.filter(onlyUnique);
-          let unique2 = this.arr2.filter(onlyUnique);
-          let unique3 = this.arr3.filter(onlyUnique);
-          let unique4 = this.arr4.filter(onlyUnique);
-
-          let arr = [unique1, unique2, unique3, unique4]
-          
-          console.log(arr);
-    }
-
-    uniquePrint(){
-        function uniqueFun1(value, self) {
-            return self.filter((item) => item === value).length === 1;
-          }
-          
-          let elem1 = this.arr1.filter(uniqueFun1);
-          let elem2 = this.arr2.filter(uniqueFun1);
-          let elem3 = this.arr3.filter(uniqueFun1);
-          let elem4 = this.arr4.filter(uniqueFun1);
-
-          let arr = [elem1, elem2, elem3, elem4];
-
-          console.log(arr);
-          
-    }
-
-    researchYumber(){
-        
-
-for (let i = 0; i < this.arr1.length; i++) {
-   let flag1 = true;
-   
-   for (let j = 2; j < i; j++) {
-      if (this.arr1[i] % j == 0) {
-         flag1 = false;
-         break;
+    sorting(a, b){
+      if(a < b){
+         return -1;
+      } else if(a > b){
+         return 1;
+      } else{
+         return 0;
       }
-   }
+    }
 
-   let elem1 =this.arr1[i];
+    collectArrs(){
+      let arr = [];
+      arr.push(this.arr1, this.arr2, this.arr3, this.arr4);
+      return arr;
+    }
 
-   if (flag1) {
-      console.log(`${elem1} Просте число`);
-   } else {
-      console.log(`${elem1} НЕ просте число`);
-   }
+    sortingCcollectArrs(){
+      this.arr1 = this.collectArrs().flat().sort(this.sorting);
+      return this.arr5;
+    }
 
-}
+    unique(){
+      let arr = [];
+      this.collectArrs.forEach(array => {
+         let NewArr = array.filter((number, elem) => {
+            return array.IndexOf(number) === elem;
+         })
 
-for (let i = 0; i < this.arr2.length; i++) {
-    let flag2 = true;
+         arr.push(NewArr);
+      });
+
+      this.arr5 = arr.flat();
+      return this.arr5;
+    }
+
+    printSameNum(){
+      let uniqueArr = [];
+      let allNum = this.collectArrs().flat();
+      let array = this.collectArrs();
+
+      allNum.forEach(number =>{
+         let rez = array.every(arr => {
+            return arr.includes(number);
+         })
+
+         if(rez && uniqueArr.includes(number)){
+            uniqueArr.push(number);
+         }
+      })
+
+      return uniqueArr;
+    }
+
+    printPrimeNum(){
+      let arr = this.collectArrs().flat().filter(number => {
+         if(number <= 1){
+            return false;
+         }
+
+         for(let i = 2; i < number; i++){
+            if(number % 1 === 0){
+               return false;
+            }
+         }
+
+         return true;
+      })
+
+      arr = arr.filter((number, elem) => {
+         return arr.indexOf(number) === elem;
+      })
+
+      return arr;
+    }
+
     
-    for (let j = 2; j < i; j++) {
-       if (this.arr2[i] % j == 0) {
-          flag2 = false;
-          break;
-       }
     }
 
-    let elem2 =this.arr2[i];
- 
-    if (flag2) {
-       console.log(`${elem2} Просте число`);
-    } else {
-       console.log(`${elem2} НЕ просте число`);
-    }
- 
- }
+    let num = new Array();
 
- for (let i = 0; i < this.arr3.length; i++) {
-    let flag3 = true;
-    
-    for (let j = 2; j < i; j++) {
-       if (this.arr3[i] % j == 0) {
-          flag3 = false;
-          break;
-       }
-    }
-
-    let elem3 =this.arr3[i];
- 
-    if (flag3) {
-       console.log(`${elem3} Просте число`);
-    } else {
-       console.log(`${elem3} НЕ просте число`);
-    }
- 
- }
-
- for (let i = 0; i < this.arr4.length; i++) {
-    let flag4 = true;
-    
-    for (let j = 2; j < i; j++) {
-       if (this.arr4[i] % j == 0) {
-          flag4 = false;
-          break;
-       }
-    }
-
-    let elem4 =this.arr4[i];
- 
-    if (flag4) {
-       console.log(`${elem4} Просте число`);
-    } else {
-       console.log(`${elem4} НЕ просте число`);
-    }
- 
- }
-
- let arr = [elem1, elem2, elem3, elem4];
- console.log(arr.uniquePrint());
-
-    }
-    }
+    console.log(num.collectArrs());
+    console.log(num.unique());
+    console.log(num.printSameNum());
+    console.log(num.printPrimeNum());
        

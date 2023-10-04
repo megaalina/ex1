@@ -15,51 +15,33 @@
 
 
 class PhoneBook{
-    #names = {
-        "Name1": "Ім'я контакту1",
-        "Name2": "Ім'я контакту2",
-        "Name3": "Ім'я контакту3"
+
+    constructor(){
+        this.users = [];
     }
 
-    #famylies = {
-        "Family1": "Прізвище контакту1",
-        "Family2": "Прізвище контакту2",
-        "Famyly3": "Прізвище контакту3"
+    createContact(name, famyle, numberPhone, email){
+        let user = {name, famyle, numberPhone, email};
+        this.users.push(user);
     }
 
-    #phone = {
-        "Phone1": 380000000001,
-        "Phone2": 380000000002,
-        "Phone3": 380000000003
+    editUser(name, famyle){
+        this.users.forEach(user => {
+            if(user.name === name && user.famyle === famyle){
+                return user.numberPhone, user.email;
+            }
+        })
     }
 
-    #email = {
-        "email1": "username1@gmail.com",
-        "email2": "username2@gmail.com",
-        "email3": "username3@gmail.com"
+    deleteUser(name, famyle){
+        this.users = this.users.filter(user => {
+            return user.famyle !== famyle && user.name !== name;
+        })
     }
-
-    constructor(){}
-    print(){
-        console.log(`${this.#names}, ${this.#famylies}, ${this.#phone}, ${this.#email}`)
-    }
-
-    set names(value){
-        return this.#names = value;
-    }
-
-    set famylies(value){
-        return this.#famylies = value;
+    
 }
 
-set phone(value){
-    return this.#phone = value;
-}
-
-set email(value){
-    return this.#email = value;
-}
-}
-
-const kontakt = new PhoneBook (Name1, Family1, Phone1, email1);
-kontakt.print();
+const contact = new PhoneBook ("Ім'я", "Прізвище", "+380 000 00 00", "username@gmail.com");
+contact.createContact();
+contact.editUser();
+contact.deleteUser();

@@ -27,101 +27,42 @@
 
 // Cat/Bird — 2, Dog/Fish — 1;
 
-class Text{
-    constructor(str, word){
-        this.str = str = prompt("Введіть текст");
-        this.word = word = prompt("Введіть слово");
-    }
 
-    researchWord(str, word){
-        console.log(this.str.indexOf(this.word));
-    }
 
-    countWord(str, word){
+class Exchange{
+    constructor(str){
+        this.str = str;
         
-            let arr1 = this.str.split(" ");
+    }
 
-            // let s1 = this.word.toLocaleLowerCase;
-            let count1 = {};
-            
-            for (this.word of arr1) {
-                if (count1[this.word] === undefined) {
-                count1[this.word] = 1;
-                } else {
-                count1[this.word]++;
+    registr(findWord){
+       let findWordArr = findWord.split('');
+       findWordArr[0] = findWordArr[0].toUpperCase();
+       findWordArr = findWordArr.join('');
+    }
+
+    exchangeWord(finder, changer){
+        let strArr = this.str.toLowerCase().split(' ');
+        strArr.forEach((word, index) => {
+            for(let i = 0; i <= finder.lenght - 1, i++;){
+                if(word === finder.lenght){
+                    strArr[index] = this.registr(changer(i))
                 }
             }
+        })
 
-            
-            console.log(count1);
-        }
+        this.str = strArr.join(' ');
 
-        researchWordNoRegistr(str){
-            let all_letters = this.str.length;
-            let upper=0;
-            let lower=0;
+        let str2 = '';
 
-            for(let i=0, upper=0,  lower=0, char; i < all_letters; i++) {
-    char = this.str.charAt(i);
+        changer.forEach((changerWord, index) => {
+            let arr = findWordArr.filter(word => word.toLowerCase() === changerWord);
+            str2 += `${this.registr(finder[index])}/${this.registr(changerWord)} - ${arr.lenght}`;
+        })
 
-    if (char == this.word.toUpperCase()) {
-        upper++;
-    }
-    else if (char == this.word.toLowerCase()){
-        lower++;
+        return console.log(str2);
     }
 }
-
-console.log(upper + lower);
-
-
-
-  
-        }
-
-        print(){
-            console.log(this.countWord(this.str, this.word));
-        }
-}
-
-const word1 = new Text("Быть или не быть, вот в чём вопрос.", "Быть");
-word1.researchWordNoRegistr("Быть или не быть, вот в чём вопрос.", "Быть");
-
-
-class Exchange extends Text{
-    constructor(str, word){
-        super(str, word);
-        this.str = "Cat runs. Dog runs. Cat jumps.";
-        this.word = word;
-        }
-        researchWordNoRegistr(str, word){
-            let arr = this.str.split(" ");
-
-            const s1 = this.word.toLocaleLowerCase;
-            const s2 = this.word.toLocaleUpperCase;
-            console.log(s1.toLocaleUpperCase() === s2.toLocaleUpperCase());
-        }
-
-        researchWord(str){
-            console.log(this.str.indexOf(researchArr[""]));
-        }
-
-        exchangeWord(str){
-            let newstr = this.str.replace(researchArr[""]/gi, exchangeArr['']);
-            console.log(newstr.researchWordNoRegistr());
-        }
-
-        countExchangeWord(str){
-            let elem = exchangeArr[''];
-            let count = this.str.split(elem).length - 1;
-            console.log(count);
-        }
-    }
-
-    let researchArr = ["cat", "dog"];
-
-    let exchangeArr = ["bird", "fish"];
-
-    const word2 = new Exchange(str);
-    word2.exchangeWord(researchArr["cat"], exchangeArr["bird"]);
-    word2.countExchangeWord();
+ let word1 = new Exchange('Cat runs. Dog runs. Cat jumps.');
+ word1.exchangeWord(['cat','dog'], ['bird', 'fish']);
+ console.log(word1.str);

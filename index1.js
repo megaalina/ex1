@@ -4,76 +4,45 @@
 // Додати до першого завдання можливість пошуку набору слів. Шукані слова потрібно зберігати в масиві.
 
 class Text{
-    constructor(str, word){
-        this.str = str = prompt("Введіть текст");
-        this.word = word = prompt("Введіть слово");
+    constructor(str){
+        this.str = str;
     }
 
-    researchWord(str, word){
-        console.log(this.str.indexOf(this.word));
+    searchWord(findWord){
+        let arrZnak = [",", ".", ":", ";", "(", ")", "#", "*", "'"];
+        let regist = this.str.toLocaleLowerCase();
+
+        arrZnak.forEach(arrZnak =>{
+            regist = regist.split(arrZnak).join('');
+        })
+
+        let registArr = regist.split(' ');
+
+        let count = 0;
+
+        registArr.forEach(word =>{
+            word.includes(findWord) ? count++ : count;
+        });
+        return console.log(`Кількість слів : ${findWord}` + count);
     }
 
-    countWord(str, word){
-        
-            let arr1 = this.str.split(" ");
+}
 
-            // let s1 = this.word.toLocaleLowerCase;
-            let count1 = {};
-            
-            for (this.word of arr1) {
-                if (count1[this.word] === undefined) {
-                count1[this.word] = 1;
-                } else {
-                count1[this.word]++;
-                }
-            }
+const word1 = new Text("Быть или не быть, вот в чём вопрос.");
+word1.searchWord("быть");
 
-            
-            console.log(count1);
-        }
-
-        researchWordNoRegistr(str){
-            let all_letters = this.str.length;
-            let upper=0;
-            let lower=0;
-
-            for(let i=0, upper=0,  lower=0, char; i < all_letters; i++) {
-    char = this.str.charAt(i);
-
-    if (char == this.word.toUpperCase()) {
-        upper++;
+class NewText extends Text{
+    constructor(str){
+        super(str)
     }
-    else if (char == this.word.toLowerCase()){
-        lower++;
+
+    searchWord(wordsArr){
+        wordsArr.forEach(findWord => {
+            this.searchWord(findWord);
+        })
     }
 }
 
-console.log(upper + lower);
-   }
 
-        print(){
-            console.log(this.countWord(this.str, this.word));
-        }
-
-    }
-        
-        
-        class ArrayText extends Text{
-    constructor(str, word){
-        super(str, word, str1);
-        this.str = str;
-        this.word = word;
-        this.str1 = this.str1;
-        }
-        researchStr(str, str1){
-            let arrStr1 = str1.split(" ");
-            console.log(this.str.indexOf(this.str1));
-        }
-
-        print(){
-            console.log(this.researchWordNoRegistr(this.str, this.word, this.str1));
-        }
-    }
-
-    const word2 = new ArrayText("Быть или не быть, вот в чём вопрос.", "Быть", "в чём вопрос");
-    word2.researchStr();
+const word2 = new NewText("Быть или не быть, вот в чём вопрос.");
+word2.searchWord("быть", "вопрос");
